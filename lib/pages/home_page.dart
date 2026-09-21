@@ -7,6 +7,7 @@ import '../data/plans.dart';
 import '../theme.dart';
 import '../widgets/calculator_demo.dart';
 import '../widgets/common.dart';
+import '../widgets/demo_video.dart';
 import '../widgets/faq_list.dart';
 import '../widgets/plan_card.dart';
 import '../widgets/site_page.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
       children: [
         _Hero(),
         _Facts(),
+        _ProductTour(),
         _CalculatorGrid(),
         _HowItWorks(),
         _Features(),
@@ -285,6 +287,37 @@ class _Facts extends StatelessWidget {
                 ],
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+// --------------------------------------------------------------------------
+
+/// The 40-second product tour: set-up to checkout, with chapter jumps.
+class _ProductTour extends StatelessWidget {
+  const _ProductTour();
+
+  @override
+  Widget build(BuildContext context) {
+    return Band(
+      color: Brand.white,
+      top: Layout.isMobile(context) ? 40 : 64,
+      child: Column(
+        children: [
+          const SectionHeading(
+            eyebrow: 'Product tour · 40 seconds',
+            title: 'From set-up to checkout, in one short video.',
+            lede: 'Create a calculator, apply it to products, then watch a '
+                'customer measure and the price follow — right through to the cart.',
+            center: true,
+          ),
+          const SizedBox(height: 40),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 980),
+            child: const DemoVideo(),
+          ),
         ],
       ),
     );

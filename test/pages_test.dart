@@ -1,6 +1,8 @@
 // Renders every page at desktop and phone width. Catches layout errors
 // (overflows, unbounded sizes) that only show up once a page is drawn.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:measurely_site/data/calculators.dart';
@@ -10,6 +12,7 @@ import 'package:measurely_site/pages/home_page.dart';
 import 'package:measurely_site/pages/info_pages.dart';
 import 'package:measurely_site/pages/pricing_page.dart';
 import 'package:measurely_site/theme.dart';
+import 'package:measurely_site/widgets/demo_video.dart';
 
 const sizes = {
   'desktop': Size(1440, 900),
@@ -143,5 +146,52 @@ void main() {
     await tester.tap(question);
     await tester.pumpAndSettle();
     expect(find.textContaining('Nine: area'), findsOneWidget);
+  });
+
+  group('product tour video', () {
+    test('the video files the page points at exist', () {
+      for (final path in [
+        DemoVideoSource.mp4,
+        DemoVideoSource.webm,
+        DemoVideoSource.poster
+      ]) {
+        expect(File('web/$path').existsSync(), isTrue,
+            reason: 'web/$path is missing');
+      }
+    });
+
+    test('chapters are in order and inside the video', () {
+      const c = DemoVideoSource.chapters;
+      for (var i = 1; i < c.length; i++) {
+        expect(c[i].seconds, greaterThan(c[i - 1].seconds));
+      }
+      expect(c.last.seconds, lessThan(DemoVideoSource.seconds));
+    });
+
+    test('times read as minutes and seconds', () {
+      expect(clockOf(0), '0:00');
+      expect(clockOf(17.2), '0:17');
+      expect(clockOf(40.5), '0:40');
+      expect(clockOf(75), '1:15');
+    });
+
+    testWidgets('the home page shows the tour with its chapters',
+        (tester) async {
+      await pump(tester, const HomePage(), sizes['desktop']!);
+      final chip = find.text('Customer measures', skipOffstage: false);
+      expect(chip, findsOneWidget);
+      await tester.ensureVisible(chip);
+      await tester.tap(chip);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('the tour is described for screen readers', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester, const HomePage(), sizes['desktop']!);
+      expect(
+          find.bySemanticsLabel(RegExp('^Product tour video')), findsOneWidget);
+      semantics.dispose();
+    });
   });
 }

@@ -16,6 +16,9 @@ dependencies:
     sdk: flutter
   # mailto: links and the App Store link. Maintained by the Flutter team.
   url_launcher: ^6.3.0
+  # The demo video on the home page is a native <video> element. Web only;
+  # tests use a stand-in (lib/widgets/demo_video_stub.dart).
+  web: ^1.1.0
 
 dev_dependencies:
   flutter_test:
