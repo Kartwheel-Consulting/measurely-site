@@ -1,0 +1,39 @@
+# Render Blueprint for the Measurely marketing site.
+#
+# A static site: Render runs build.sh (which installs Flutter and builds),
+# then serves build/web from its CDN. No server, nothing to keep running.
+#
+# The rewrite sends every path to index.html, which is what lets
+# /pricing and /calculators/area open directly or on refresh. Without it
+# those URLs return Render's own 404.
+
+services:
+  - type: web
+    name: measurely-site
+    runtime: static
+    # "bash build.sh", not "./build.sh": a file committed from Windows loses
+    # its executable bit, and Render would refuse to run it.
+    buildCommand: bash build.sh
+    staticPublishPath: build/web
+    headers:
+      # These change on every deploy and must always be fetched fresh, or
+      # visitors keep an old version of the site.
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /flutter_bootstrap.js
+        name: Cache-Control
+        value: no-cache
+      - path: /main.dart.js
+        name: Cache-Control
+        value: no-cache
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

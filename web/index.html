@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    $FLUTTER_BASE_HREF is replaced by `flutter build web`. Leave it as is.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <title>Measurely · Measurement-based pricing for Shopify</title>
+  <meta name="description" content="Sell cut-to-size and made-to-measure products on Shopify. Customers enter their size, the price follows the measurement, and checkout charges exactly that. Nine calculator types, metric and imperial units, free plan available.">
+  <meta name="theme-color" content="#1E1B4B">
+
+  <!--
+    SITE_URL: the address this site is served from. It must be absolute for
+    link previews on WhatsApp, LinkedIn, Slack and X. It matches the Render
+    service name in render.yaml; change all three lines if you use your own
+    domain.
+  -->
+  <link rel="canonical" href="https://measurely-site.onrender.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Measurely">
+  <meta property="og:title" content="Measurely · Measurement-based pricing for Shopify">
+  <meta property="og:description" content="Customers enter their size, the price follows the measurement, and checkout charges exactly that.">
+  <meta property="og:url" content="https://measurely-site.onrender.com/">
+  <meta property="og:image" content="https://measurely-site.onrender.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Measurely">
+
+  <style>
+    html, body { margin: 0; height: 100%; background: #ffffff; }
+
+    /*
+      Shown until Flutter draws its first frame, then removed. Flutter
+      downloads its engine before anything appears; without this the visitor
+      stares at a blank page for that time.
+    */
+    #loader {
+      position: fixed; inset: 0; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 22px;
+      background: linear-gradient(118deg, #1E1B4B 0%, #3730A3 38%, #4F46E5 64%, #0F766E 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #fff;
+      transition: opacity .25s ease;
+    }
+    #loader.gone { opacity: 0; pointer-events: none; }
+    #loader img { width: 72px; height: 72px; border-radius: 18px; }
+    #loader .name { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+    #loader .bar { width: 160px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.2); overflow: hidden; }
+    #loader .bar::after {
+      content: ""; display: block; width: 40%; height: 100%; background: #fff; border-radius: 3px;
+      animation: slide 1.1s ease-in-out infinite;
+    }
+    @keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+    @media (prefers-reduced-motion: reduce) { #loader .bar::after { animation: none; width: 100%; } }
+
+    /*
+      The same content as the site, as plain HTML, for search engines and
+      link previews — Flutter draws onto a canvas, which they cannot read.
+      Kept off-screen rather than display:none so it is read, and removed
+      once the app has drawn.
+    */
+    #seo { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <div id="loader" role="status" aria-label="Loading Measurely">
+    <img src="icons/Icon-maskable-192.png" alt="">
+    <div class="name">Measurely</div>
+    <div class="bar"></div>
+  </div>
+
+  <main id="seo">
+    <h1>Measurely — measurement-based pricing for Shopify</h1>
+    <p>Sell by the metre and charge exactly that. Customers type their own size on the product page, the price follows the measurement as they type, and checkout charges exactly that price, recalculated on Shopify's side.</p>
+
+    <h2>Nine ways to measure</h2>
+    <ul>
+      <li><a href="/calculators/area">Area — length × width</a>: for glass, worktops, signage and blinds cut from a sheet.</li>
+      <li><a href="/calculators/area-direct">Area — direct entry</a>: for flooring, wallpaper and turf ordered by the square metre or square foot.</li>
+      <li><a href="/calculators/length">Length</a>: for rope, cable, chain and fabric by the metre.</li>
+      <li><a href="/calculators/linear">Linear — length + width</a>: for L-shaped runs such as worktop edging.</li>
+      <li><a href="/calculators/perimeter">Perimeter</a>: for frames, borders and edging.</li>
+      <li><a href="/calculators/volume">Volume — length × width × height</a>: for foam, timber and packaging.</li>
+      <li><a href="/calculators/volume-direct">Volume — direct entry</a>: for soil, aggregates and concrete.</li>
+      <li><a href="/calculators/weight">Weight</a>: priced per kilogram or per pound.</li>
+      <li><a href="/calculators/quantity">Quantity</a>: a price per item with floors, caps and discounts.</li>
+    </ul>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Metric and imperial units converted automatically — customers can type centimetres while you price per square foot.</li>
+      <li>The product's own price is always the floor, so small cuts are never under-charged.</li>
+      <li>Prices recalculated at checkout — the browser's figure is never trusted.</li>
+      <li>Wastage allowance and rounding, size limits and step sizes.</li>
+      <li>Tiered rates by size and quantity discounts.</li>
+      <li>A full history of every change that affects a price.</li>
+    </ul>
+
+    <h2><a href="/pricing">Pricing</a></h2>
+    <ul>
+      <li>Free — $0: 1 calculator, 5 products or collections.</li>
+      <li>Starter — $9.99 a month or $99 a year: 3 calculators, 50 products or collections, wastage, rounding, size limits and button styling.</li>
+      <li>Professional — $19.99 a month or $199 a year: 15 calculators, 500 products or collections, whole collections, store-wide rules, tiered rates and quantity discounts.</li>
+      <li>Unlimited — $39.99 a month or $399 a year: unlimited calculators and products, priority support and a setup call.</li>
+    </ul>
+    <p>Paid plans start with a 14-day free trial and are billed through Shopify.</p>
+
+    <p><a href="/faq">Frequently asked questions</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy policy</a></p>
+    <p>Measurely is built by Kartwheel Consulting, London and Chennai.</p>
+  </main>
+
+  <noscript>
+    <p style="font-family: sans-serif; padding: 24px;">Measurely's website needs JavaScript. Please enable it, or email support@kartwheelconsulting.com.</p>
+  </noscript>
+
+  <script>
+    // Flutter fires this once the first frame is on screen.
+    window.addEventListener('flutter-first-frame', function () {
+      var loader = document.getElementById('loader');
+      var seo = document.getElementById('seo');
+      if (seo) seo.remove();
+      if (loader) {
+        loader.classList.add('gone');
+        setTimeout(function () { loader.remove(); }, 300);
+      }
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

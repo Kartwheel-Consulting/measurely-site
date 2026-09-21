@@ -1,0 +1,43 @@
+name: measurely_site
+description: Measurely marketing website — measurement-based pricing for Shopify.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  # Color.withValues arrived in Flutter 3.27.
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Clean URLs (/pricing rather than /#/pricing). Ships with the Flutter SDK.
+  flutter_web_plugins:
+    sdk: flutter
+  # mailto: links and the App Store link. Maintained by the Flutter team.
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Inter, bundled rather than fetched: Flutter web otherwise downloads Roboto
+  # from Google at runtime, which delays the first readable frame. Latin
+  # subset, SIL Open Font License (assets/fonts/OFL.txt).
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-400.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-500.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-600.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-700.ttf
+          weight: 700
+        - asset: assets/fonts/Inter-800.ttf
+          weight: 800
